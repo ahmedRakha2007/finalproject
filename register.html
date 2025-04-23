@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+      <!--IMPORT BOOTSTRAP-->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!--IMPORT GOOGLE FONTS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+      <!--IMPORT FONT AWESOME-->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <script src="node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
+      <!--IMPORT AXIOS-->
+      <script src="node_modules/axios/dist/axios.min.js"></script>
+    
+      
+</head>
+<body class=" " style="background: linear-gradient(to right, rgb(63,0,0),rgb(93,0,0),rgb(123,0,0)); height: 100vh;">
+    <style>
+        #liveAlertPlaceholder{
+              position: fixed;
+              bottom: 5%;
+              right: 0%;
+              z-index: 1000;
+          }
+     </style>
+    <div id="liveAlertPlaceholder"></div>
+        <!--///////////////// LOADER /////////////////////-->
+        <div id="loader" class="d-flex justify-content-center align-items-center" style="position: fixed; top: 0px; right: 0px; bottom: 0px; left: 0px; margin: auto auto; z-index: 9999; background-color: rgba(100, 0, 0, 0.525); width: 100px; height: 100px; border-radius: 20px;">
+            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          </div>
+          <!--///////////////// LOADER /////////////////////-->
+    <!--ARROW TO GO TO THE MAIN PAGE-->
+    <ul class="breadcrumb">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="#">Register</a></li>
+      </ul>
+     <!--//ARROW TO GO TO THE MAIN PAGE//-->
+             <!--/////////////////////AUTH CONTAINER//////////////-->
+    <div class="w-100 d-flex justify-content-center align-items-center"style="height: 95%;">
+        <div class="register-container bg-light rounded-3 d-flex flex-column align-items-center justify-content-between pt-2" style="margin-top: 100px;">
+            <h1 class="mt-1" style="color: rgb(63,0,0);">Sign Up</h1>
+            <div class="main-container w-100">
+            <div class="username-container w-100 ms-3 mb-2">
+                <h2 class="fs-4">Name</h2>
+                <input class="rounded-3 px-1 shadow" id="name-input" type="text" style="width: 90%;">
+            </div>
+            <div class="password-container w-100 ms-3 mt-1">
+                <h2 class="fs-4">Username</h2>
+                <input class="rounded-3 px-1 shadow" id="username-input" type="text" style="width: 90%;">
+            </div>                                 
+            <div class="password-container w-100 ms-3 mt-1">
+                <h2 class="fs-4">Email</h2>
+                <input class="rounded-3 px-1 shadow" id="email-input" type="email" style="width: 90%;">
+            </div>                                 
+            <div class="password-container w-100 ms-3 mt-1">
+                <h2 class="fs-4">Password</h2>
+                <input class="rounded-3 px-1 shadow" id="password-input" type="password" style="width: 90%;">
+            </div>  
+            <hr>  
+            <div class="w-100 ms-3 mt-1">
+                <h2 class="fs-5">Choose A Profile Picture</h2>
+                <input id="profile-pic" type="file">
+            </div>                             
+        </div>  
+        <div class="button mb-2 w-100 d-flex justify-content-center">
+            <button class="rounded-5 text-light py-1 shadow fs-5 fw-medium" type="submit" onclick="(handleRegisterButton())" style="width: 90%; background: rgb(123, 0, 0); cursor: pointer;">Register</button>
+        </div>
+        </div>
+    </div>
+     <!--////////////AUTH CONTAINER//////////-->
+    <!--IMPORT THE JS FILE-->
+    <script src="main.js"></script>
+    <script src="register.js"></script>
+</body>
+</html>

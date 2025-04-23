@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final-Project</title>
+    <link rel="stylesheet" href="style.css">
+    <!--IMPORT BOOTSTRAP-->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--IMPORT GOOGLE FONTS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <!--IMPORT FONTAWESOME-->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <script src="node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
+    <!--IMPORT AXIOS-->
+    <script src="node_modules/axios/dist/axios.min.js"></script>              
+</head>
+<body>
+  
+    <!--Navigation bar-->
+    <!--.................ALERT CONTAINER.............-->
+    <div id="liveAlertPlaceholder"></div>
+    <!--.................ALERT CONTAINER.............-->
+    <!--///////////////// LOADER /////////////////////-->
+    <div id="loader" class="d-flex justify-content-center align-items-center" style="position: fixed; top: 0px; right: 0px; bottom: 0px; left: 0px; margin: auto auto; z-index: 9999; background-color: rgba(100, 0, 0, 0.525); width: 100px; height: 100px; border-radius: 20px;">
+      <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+    <!--///////////////// LOADER /////////////////////-->
+    <!--..................................DROP DOWN CONTENT...................................-->
+    <ul id="dropDown-content" style="position: fixed; display: none;">
+        <li><a onclick="goToMyProfile()">Profile</a></li>
+        <li id = "register-btn-drop"><a href="register.html">Register</a></li>
+        <li id="login-btn-drop"><a href="login.html">Login</a></li>
+        <li id="logout-btn-drop"  onclick="logout()"><h2>Log out</h2></li>
+      </ul>
+    <!--..................................DROP DOWN CONTENT...................................-->
+    <!---->
+    <div class="container nav-bar d-flex justify-content-center">
+        <nav class="col-9 rounded-3 rounded-top-0 px-2 pt-4 d-flex justify-content-between align-items-center pb-2 pb-md-0">
+            <div class="left-container d-flex align-items-center">
+                <a class="text-white fs-3 text-decoration-none" href="home.html">Tarmeez</a>
+
+            <ul class="list-unstyled d-flex ms-md-4" style="padding-top: 20px;">
+                <li>
+                    <a  class="text-light text-decoration-none hover-text-primary fs-6 d-none d-md-block" href="home.html" style="cursor: pointer;">Home</a>
+                </li>
+                <li>
+                    <a onclick="goToMyProfile()" class="text-light text-decoration-none ms-2 fs-6 d-none d-md-block" style="cursor: pointer;">Profile</a>
+                </li>
+            </ul>
+        </div>
+     <!--FOR NON LOGGED IN USER-->
+     <div class="right-container w-100 d-flex justify-content-end">
+        <a id="login-btn" href="login.html" type="button" class="btn btn-outline-light btn-sm text-decoration-none d-none d-md-block " style="cursor: pointer;">Login</a>
+        <a id="register-btn"  href="register.html" type="button" class="btn btn-outline-light btn-sm text-decoration-none ms-2 d-none d-md-block" style="cursor: pointer;">Register</a>
+        <i onclick="handleDropDown()" id="nav-dropDown" class="d-block d-md-none fa-solid fa-bars text-light" style="cursor: pointer; font-size: 30px"></i>
+    </div>
+     <!--//FOR NON LOGGED IN USEfR//-->
+     <!--FOR LOGGED IN USERS-->
+    <div class="right-container d-flex align-items-center">
+        <img id="profile-image" class="rounded-circle border-1 d-none d-md-block" src="assets/profile-imgs/very-good-anime.jpg" alt="image" style="width: 40px; height: 40px;">
+        <h2 id="user-name" class="fs-6 fw-bold ms-3 mt-2 text-light d-none d-md-block ">Ahmed2007</h2>
+        <button id="logout-btn" onclick="logout()" type="button" class="btn btn-outline-danger btn-sm text-decoration-none ms-3 d-none d-md-block" style="cursor: pointer;">Logout</button>
+    </div>
+     <!--//FOR LOGGED IN USERS//-->
+        </nav>
+    </div>
+    <!-- //Navigation bar// -->
+    
+    <!--Main Content-->
+        <div class="container mt-5 min-vh-100">
+            <div class="row justify-content-center">
+                <!--POSTS-->
+                <div id="posts" class="col-9">
+                    <!--POST-->
+                            
+                    <!--//POST//-->    
+                </div>
+                <div class="text-center mt-4 mb-5">
+                  <button id="loadMoreBtn" class="load-more-btn">Load More</button>
+                </div>
+                <!--//POSTS//-->
+            </div>
+        </div>
+    <!--//Main Content//-->
+        <!--...........ADD POST BUTTON............-->
+        <div id="add-btn" onclick="addPostBtnClicked()" class="rounded-circle d-flex justify-content-center align-items-center shadow-lg"><i class="fa-solid fa-plus fa-2x"></i></div>
+        <!--...........ADD POST BUTTON............-->
+        <!--............CREATE A NEW POST MODAL...........-->
+        <div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title fw-bold fs-2 " id="post-modal-title" style="color: rgb(63, 0, 0);">Create A New Post</h5>
+                </div>
+                <div class="modal-body">
+                    <label class="fw-bold fs-3">Choose A Post Photo</label>
+                    <input type="file" id="post-photo-input">
+                    <input id="post-id-input" type="hidden" value="false">
+                    <h1 class="fw-bold fs-3 mt-2">Post Title</h1>
+                    <input id="post-title-input" class="rounded-2 p-1 w-100 shadow-lg" type="text">
+                    <h1 class="fw-bold fs-3 mt-2">Post Body</h1>
+                    <textarea id="post-body-input" class="w-100 rounded-4 p-2 shadow-lg" rows="5" style="resize: none;"></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary shadow-lg" data-bs-dismiss="modal">Close</button>
+                  <button onclick="createNewPostClicked()" id="submit-create-post" type="button" class="btn shadow-lg" style="background-color: rgb(14, 123, 0); color: white;">Create</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!--............CREATE A NEW POST MODAL...........-->
+         <!--............DELETE POST MODAL...........-->
+         <div class="modal fade" id="delete-post-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title fw-bold fs-2 " style="color: rgb(63, 0, 0);">Are You Sure?</h5>
+                  <input type="hidden" id="delete-post-id">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary shadow-lg" data-bs-dismiss="modal">Close</button>
+                  <button onclick="confirmDeletePost()" id="delete-post-btn" type="button" class="btn shadow-lg" style="background-color: rgb(63,0,0); color: white;">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!--............DELETE POST MODAL...........-->
+    <!--IMPORT THE JS FILE-->
+    <script src="main.js"></script>
+    <script src="home.js"></script>
+</body>
+</html>

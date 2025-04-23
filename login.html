@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+      <!--IMPORT BOOTSTRAP-->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!--IMPORT GOOGLE FONTS-->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+      <!--IMPORT FONT AWESOME-->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <script src="node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
+      <!--IMPORT AXIOS-->
+      <script src="node_modules/axios/dist/axios.min.js"></script>
+</head>
+<body style="background: linear-gradient(to right, rgb(63,0,0),rgb(93,0,0),rgb(123,0,0)); height: 100vh;">
+   <style>
+      #liveAlertPlaceholder{
+            position: fixed;
+            bottom: 5%;
+            right: 0%;
+            z-index: 1000;
+        }
+   </style>
+    <ul class="breadcrumb">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="#">Log In</a></li>
+      </ul>
+             <!--/////////////////////AUTH CONTAINER//////////////-->
+           
+           
+             <div id="liveAlertPlaceholder"></div>
+                 <!--///////////////// LOADER /////////////////////-->
+    <div id="loader" class="d-flex justify-content-center align-items-center" style="position: fixed; top: 0px; right: 0px; bottom: 0px; left: 0px; margin: auto auto; z-index: 9999; background-color: rgba(100, 0, 0, 0.525); width: 100px; height: 100px; border-radius: 20px;">
+        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      </div>
+      <!--///////////////// LOADER /////////////////////-->
+
+    <div class="w-100 d-flex justify-content-center align-items-center"style="height: 95%;">
+        <div class="Auth-container bg-light rounded-3 d-flex flex-column align-items-center justify-content-between pt-3 pb-1" style="margin-top: 110px;">
+            <h1 class="mt-1 fs-1 fw-normal">Log In</h1>
+            <div class="ep-container w-100">
+            <div class="username-container w-100 ms-3 mb-2">
+                <h2>Username</h2>
+                <input  class="rounded-3 px-1 shadow" id="username-input" type="text" style="width: 90%;">
+            </div>
+            <div class="password-container w-100 ms-3">
+                <h2>Password</h2>
+                <input  class="rounded-3 px-1 shadow" id="password-input" type="password" style="width: 90%;">
+            </div>                                 
+        </div>  
+        <div class="button mb-2 w-100 d-flex justify-content-center">
+            <button id="liveAlertBtn" class="rounded-5 text-light py-1 fs-4 fw-normal shadow" type="submit" onclick="(handleLoginButton())" style="width: 90%; background: rgb(123, 0, 0); cursor: pointer;">Log In</button>
+        </div>
+        </div>
+    </div>
+     <!--////////////AUTH CONTAINER//////////-->
+     <!--IMPORT THE JS FILE-->
+    <script src="main.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>
